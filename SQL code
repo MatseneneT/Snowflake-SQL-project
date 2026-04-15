@@ -1,0 +1,133 @@
+-- 1. View the menu_items_table
+SELECT *
+FROM menu_items_table;
+-- 2. Find the number of items in the menu
+SELECT COUNT(*)
+FROM menu_items_table;
+--3. What are the least and most expensive items on menu
+--3.1 What is the least  expensive items on menu
+SELECT *
+FROM menu_items_table
+ORDER BY price;
+--3.2 What is the most  expensive items on menu
+SELECT *
+FROM menu_items_table
+ORDER BY price DESC;
+--4. How many Italian dishes are on the menu
+SELECT COUNT(*)
+FROM menu_items_table
+WHERE category = 'Italian';
+--5. What are the least and most expensive items on menu
+--5.1 What is the least  expensive items on menu
+SELECT *
+FROM menu_items_table
+WHERE category ='Italian'
+ORDER BY price;
+--5.1 What is the least  expensive items on menu
+SELECT *
+FROM menu_items_table
+WHERE category ='Italian'
+ORDER BY price DESC;
+-- How many dishes are in the category 
+SELECT category, COUNT(menu_item_id) AS number_of_dishes
+FROM menu_items_table
+GROUP BY category;
+-- Average dish price within each category
+SELECT category, AVG(price) AS average_price
+FROM menu_items_table
+GROUP BY category;
+
+--A. View the order_details_table
+SELECT *
+FROM order_details_table;
+--B. What is the date range of the table
+SELECT *
+FROM order_details_table
+ORDER BY order_date;
+--B.1 What is the min date range of the table
+SELECT MIN(order_date)
+FROM order_details_table
+ORDER BY order_date;
+--B.2 What is the max date range of the table
+SELECT MAX(order_date)
+FROM order_details_table
+ORDER BY order_date;
+--C. How many orders were made within this date range
+SELECT COUNT(DISTINCT(order_id))
+FROM order_details_table;
+--D. How many items were ordered within this date range
+SELECT COUNT(order_details_id)
+FROM order_details_table;
+--E. Which orders had the most items
+SELECT order_id, COUNT(item_id) AS number_items
+FROM order_details_table
+GROUP BY order_id;
+--E.1 Which orders had the most items in descending order
+SELECT order_id, COUNT(item_id) AS number_items
+FROM order_details_table
+GROUP BY order_id
+ORDER BY number_items DESC;
+--E.2  Which orders had the most items in ascending order
+SELECT order_id, COUNT(item_id) AS number_items
+FROM order_details_table
+GROUP BY order_id
+ORDER BY number_items ASC;
+-- How many orders had more than 12 items
+SELECT COUNT(*)
+FROM (SELECT order_id, COUNT(item_id) AS number_items
+FROM order_details_table
+GROUP BY order_id
+HAVING number_items > 12) AS number_of_orders;
+
+--Combine the menu_items_table with order_details_table into a single table
+SELECT * 
+FROM menu_items_table;
+SELECT *
+FROM order_details_table;
+
+
+SELECT *
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id;
+
+--What were the least ordered items? what categories were they in?
+SELECT item_name, category, COUNT(order_details_id) AS number_purchases
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id
+GROUP BY item_name, category
+ORDER BY number_purchases;
+
+--What were the most ordered items? what categories were they in?
+SELECT item_name, category, COUNT(order_details_id) AS number_purchases
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id
+GROUP BY item_name, category
+ORDER BY number_purchases DESC;
+
+--What were the top 5 orders that spent the most money
+SELECT order_id, SUM(price) AS total_spent
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id
+GROUP BY order_id
+ORDER BY total_spent DESC
+LIMIT 5;
+
+-- View the details of the highest spend order, what insights can I gather here
+SELECT category, COUNT (item_id) AS number_items
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id
+WHERE order_id = 440
+GROUP BY category;
+
+-- View the details of the top 5 highest spend orders. what insights can you gather from here
+SELECT order_id, category, COUNT (item_id) AS number_items
+FROM order_details_table od 
+INNER JOIN menu_items_table mi 
+ON TRY_TO_NUMBER(od.item_id) = mi.menu_item_id
+WHERE order_id  IN (440, 2075, 1957, 330, 2675)
+GROUP BY order_id, category;
