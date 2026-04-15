@@ -1,6 +1,6 @@
 Restaurant Operations Analysis (SQL)
  Overview
-An end-to-end SQL analysis using Snowflake to evaluate a restaurant's menu performance and customer ordering habits following a menu relaunch.
+This project involves a deep-dive analysis of a restaurant's menu and customer order patterns following a new menu relaunch. The goal was to identify high-performing menu items, analyze customer spending behavior, and provide data-driven insights to optimize restaurant operations.
 
  Tech Stack
 - SQL (Snowflake)
