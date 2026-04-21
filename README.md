@@ -3,8 +3,7 @@
 The Taste of the World Café recently debuted a new menu featuring diverse international offerings and generous portions. As a Data Analyst, the goal of this project is to evaluate the initial performance of this new menu by digging into customer order data. By extracting insights from menu and transaction records, this analysis identifies high-performing dishes, pinpointing underperforming items, and uncovering the spending habits of the café’s top customers. These findings serve to provide actionable recommendations for menu optimization and improved operational efficiency.
 
 ## Data set
--<a href<="https://mavenanalytics.io/data-playground/restaurant-orders">Data set</a>
-
+-<a href="https://mavenanalytics.io/data-playground/restaurant-orders">Data set</a>
 
 ## Objectives
 1. Menu Inventory Exploration
@@ -41,6 +40,10 @@ The Taste of the World Café recently debuted a new menu featuring diverse inter
 - Order Volume: Total of 5,370 unique orders analyzed.
 - High-Value Orders: Identified 23 orders containing more than 12 items.
 - Top Spend: The single highest order (ID 440) totaled $192.15.
+
+## Snowflake Code 
+-<a href="https://github.com/MatseneneT/Snowflake-SQL-project/blob/main/SQL%20code">Raw code</a>
+-<a href="https://app.snowflake.com/af-south-1.aws/kd48491/#/workspaces/ws/USER%24/PUBLIC/DEFAULT%24">Snowflake code</a>
 
 ## Recommendations and conclusion
 Recommendations
